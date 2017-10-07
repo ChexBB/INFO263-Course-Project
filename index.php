@@ -17,12 +17,30 @@ require_once 'database.php';
   
 	<h1>GoBus Transport App</h1>
   
-	<p id="selectRoute">Select a Route:</p>
-    
+    <div>
+	<select dropMenu Name='Drop down menu'> <!--Initialize drop down--> 
+		<option value="">----Select----</option>
+		<?php
+		$fetch_query = $conn->query("SELECT routes.route_id, routes.route_short_name, routes.route_long_name
+				FROM akl_transport.routes");
+		?>
+		<?php
+		while ($row = $fetch_query->fetch_assoc()) {
+			?>
+			 <?php
+			 echo '<option value="">'.$row['route_short_name'].''." - ".''.$row['route_long_name'].'</option>';
+		}
+		?>
+	</select>
+	
+	<input type="submit" name="Submit" value="Search" />
+		
+    </div>
+	
   </head>
   
   <body>
-
+	
   </body>
 </html>
 
