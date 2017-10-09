@@ -7,5 +7,5 @@ vti_modifiedby:SR|UOCNT\\cll62
 vti_timecreated:TR|07 Oct 2017 04:31:39 -0000
 vti_cacheddtm:TX|07 Oct 2017 04:31:39 -0000
 vti_filesize:IR|342
-vti_syncofs_192.168.142.2\:21:TW|09 Oct 2017 02:17:00 -0000
-vti_syncwith_192.168.142.2\:21:TR|07 Oct 2017 04:31:39 -0000
+vti_syncofs_192.168.142.2\:21:TW|09 Oct 2017 06:22:00 -0000
+vti_syncwith_192.168.142.2\:21:TX|07 Oct 2017 04:31:39 -0000

@@ -19,8 +19,6 @@ require_once 'database.php';
 	  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBajjU1EoGpVz0QKgSL2c_aS6vJDb8N5cA&callback=initMap">
 	</script>
 	<script src="scripts/map.js"></script>
-
-    
 	
   </head>
   
@@ -29,22 +27,19 @@ require_once 'database.php';
   	
 	<h1>GoBus Transport App</h1>
   	
-  	
 	<select dropMenu Name='Drop down menu'> <!--Initialize drop down--> 
 		<option value="">----Select----</option>
 		<?php
-		$fetch_query = $conn->query("SELECT distinct routes.route_short_name, routes.route_long_name
-				FROM akl_transport.routes");
+		$fetch_query = $conn->query("SELECT distinct routes.route_short_name FROM akl_transport.routes ORDER BY route_short_name ASC");
 		?>
 		<?php
 		while ($row = $fetch_query->fetch_assoc()) {
 			?>
 			 <?php
-			 echo '<option value="">'.$row['route_short_name'].''." - ".''.$row['route_long_name'].'</option>';
+			 echo '<option value="">'.$row['route_short_name'].'</option>';
 		}
 		?>
 	</select>
-	
 	
 	<input type="submit" name="Submit" value="Search" />
 	</div>
