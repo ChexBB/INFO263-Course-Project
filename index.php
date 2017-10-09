@@ -30,15 +30,8 @@ require_once 'database.php';
 	<select dropMenu Name='Drop down menu'> <!--Initialize drop down--> 
 		<option value="">----Select----</option>
 		<?php
-		$fetch_query = $conn->query("SELECT distinct routes.route_short_name FROM akl_transport.routes ORDER BY route_short_name ASC");
-		?>
-		<?php
-		while ($row = $fetch_query->fetch_assoc()) {
-			?>
-			 <?php
-			 echo '<option value="">'.$row['route_short_name'].'</option>';
-		}
-		?>
+		populateRoutes($conn);		
+		?>	
 	</select>
 	
 	<input type="submit" name="Submit" value="Search" />
