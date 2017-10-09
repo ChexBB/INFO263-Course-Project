@@ -13,15 +13,27 @@ require_once 'database.php';
 
 <html>
   <head>
+  
 	<link rel="stylesheet" href="CSS/master.css" type="text/css">
+	<script async defer
+	  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBajjU1EoGpVz0QKgSL2c_aS6vJDb8N5cA&callback=initMap">
+	</script>
+	<script src="scripts/map.js"></script>
+
+    
+	
+  </head>
   
+  <body>
+	<div id="header">
+  	
 	<h1>GoBus Transport App</h1>
-  
-    <div>
+  	
+  	
 	<select dropMenu Name='Drop down menu'> <!--Initialize drop down--> 
 		<option value="">----Select----</option>
 		<?php
-		$fetch_query = $conn->query("SELECT routes.route_id, routes.route_short_name, routes.route_long_name
+		$fetch_query = $conn->query("SELECT distinct routes.route_short_name, routes.route_long_name
 				FROM akl_transport.routes");
 		?>
 		<?php
@@ -33,24 +45,15 @@ require_once 'database.php';
 		?>
 	</select>
 	
-	<input type="submit" name="Submit" value="Search" />
-		
-    </div>
 	
-  </head>
-  
-  <body>
+	<input type="submit" name="Submit" value="Search" />
+	</div>
+	
+	<div id="map"></div>
 	
   </body>
+  
 </html>
-
-<div id="map"></div>
-
-<script async defer
-  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBajjU1EoGpVz0QKgSL2c_aS6vJDb8N5cA&callback=initMap">
-</script>
-<script src="scripts/map.js"></script>
-
 <?php
 require_once 'include/footer.php';
 ?>
