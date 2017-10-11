@@ -24,7 +24,7 @@ function populateRoutes($conn)
 	$fetch_query = $conn->query("SELECT distinct routes.route_short_name FROM akl_transport.routes ORDER BY route_short_name ASC");
 		
 	while ($row = $fetch_query->fetch_assoc()) {
-		echo '<option value="">'.$row['route_short_name'].'</option>';
+		echo '<option value="'.$row['route_short_name'].'">'.$row['route_short_name'].'</option>';
 	}
 }
 

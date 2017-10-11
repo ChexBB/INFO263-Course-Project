@@ -13,3 +13,8 @@ function initMap() {
 function refreshMap() {
 	google.maps.event.trigger(map, 'resize');
 }
+
+function apiQuery() {
+	var query_route = $('#route_picker').val();
+	alert(query_route);
+}
