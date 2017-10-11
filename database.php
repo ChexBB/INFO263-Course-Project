@@ -7,8 +7,6 @@ if ($conn->connect_error)
 {
     fatalError($conn->connect_error);
     return;
-} else {
-	echo "Connection success!"; /*For testing only*/
 }
 
 function fatalError($error)
