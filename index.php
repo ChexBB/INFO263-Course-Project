@@ -27,7 +27,7 @@ require_once 'database.php';
   	
 	<h1>GoBus Transport App</h1>
   	
-	<select dropMenu Name='Drop down menu'> <!--Initialize drop down--> 
+	<select dropMenu Name='route_picker'> <!--Initialize drop down--> 
 		<option value="">----Select----</option>
 		<?php
 		populateRoutes($conn);		
@@ -35,6 +35,13 @@ require_once 'database.php';
 	</select>
 	
 	<input type="submit" name="Submit" value="Search" />
+    <?php
+	if($_SERVER['REQUEST_METHOD'] == 'POST')
+	{
+		$route_chosen=$_POST['route_picker'];
+		echo $route_chosen;
+	}
+	?>
 	</div>
 	
 	<div id="map"></div>
