@@ -8,7 +8,9 @@ require_once 'database.php';
 <script>
     $(document).ready(function() {
 		$('#route_picker').on('change',function(){
-			apiQuery();
+			var query_route = apiQuery();
+			
+		
 		})
     });
 </script>
@@ -30,7 +32,7 @@ require_once 'database.php';
 	<h1>GoBus Transport App</h1>
   	
 	<select dropMenu Name='route_picker' id='route_picker'> <!--Initialize drop down--> 
-		<option value="">----Select----</option>
+		<option value=""></option>
 		<?php
 		populateRoutes($conn);
 		?>	
