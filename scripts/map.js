@@ -16,6 +16,6 @@ function refreshMap() {
 
 function apiQuery() {
 	var query_route = $('#route_picker').val();
-	alert(query_route);
-	$.get("vehicle_query.php");
+	alert("hi")
+	alert($.get("vehicle_query.php"));
 }

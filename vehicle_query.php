@@ -11,7 +11,7 @@ $params = array("routeid" => $route_ids);
 $results = apiCall($APIKey, $url, $params);
 // Tell the browser we are sending back json
 header('Content-Type: application/json');
-print $results[0];
+echo $results[0];
 
 
 
