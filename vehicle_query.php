@@ -13,6 +13,21 @@ $results = apiCall($APIKey, $url, $params);
 header('Content-Type: application/json');
 echo $results[0];
 
+# our work
+$param = $_POST['route'];
+$query = $conn->prepare( #SQL statement to get trip ID)
+$query->bind_param('s', $param);
+$query->execute();
+$result = $query->get_result();
+$trips = getTripIds(Rresult);
+$conn->close();
+
+$trip_array = array("tripid" -> $trips);
+$apiJSOn = apiCall($APIKey, $url, $trip_array);
+$busArray = processJSON($apiJSON);
+$busJSON = json_encode($busArray);
+header('Content-Type: application/json');
+echo($busJSON);
 
 
 
