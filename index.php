@@ -32,7 +32,7 @@ require_once 'database.php';
 	<h1>GoBus Transport App</h1>
   	
 	<select dropMenu Name='route_picker' id='route_picker'> <!--Initialize drop down--> 
-		<option value=""></option>
+		<option id="default_route" value="set">----Choose route---</option>
 		<?php
 		populateRoutes($conn);
 		?>	
