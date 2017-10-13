@@ -16,6 +16,15 @@ function refreshMap() {
 
 function apiQuery() {
 	var query_route = $('#route_picker').val();
-	alert("hi")
-	alert($.get("vehicle_query.php"));
+	alert(query_route); //test if route is selected
+	//alert($.get("vehicle_query.php"));
+	
+	$.ajax({
+        type: 'post',
+        url: 'vehicle_query.php',
+        data: {query_route : query_route},
+        success: function( data ) {
+            console.log( data );
+        }
+    });
 }
