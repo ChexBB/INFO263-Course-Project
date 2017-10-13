@@ -13,5 +13,7 @@ $results = apiCall($APIKey, $url, $params);
 header('Content-Type: application/json');
 print $results[0];
 
-?>
 
+
+
+?>
