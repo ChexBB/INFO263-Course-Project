@@ -34,7 +34,7 @@ function apiQuery() {
 //function to add markers for each bus
 //@param busLocations array containing all the buses to be displayed
 //need to call from processJSON somehow? 
-function showVehicles(busLocation) {
+/**function showVehicles(busLocation) {
     var bounds = new google.maps.LatLngBounds();
 
     //removes of all existing markers
@@ -45,7 +45,6 @@ function showVehicles(busLocation) {
     busLocation.forEach(function (bus) {
         var busMarker = new google.maps.Marker({
             position: { lat: bus.latitude, lng: bus.longitude },
-            title: 'Bus: ' + bus.vehicle_id,
-            map: map,
-            icon: icon
-        });
+            title: 'Bus: ' + bus.vehicle_id, map: map;
+        }); **/
+       
