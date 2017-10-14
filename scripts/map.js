@@ -22,10 +22,11 @@ function apiQuery() {
 	var xmlhttp = new XMLHttpRequest();
 	    if (this.readyState == 4 && this.status == 200) {
 	    	response = document.getElementByTagName("body").innerHTML = this.responseText;
+	    	alert(response);
 	    }
         xmlhttp.open("GET", "vehicle_query.php?r=" + query_route, true);
         xmlhttp.send();
-	alert(response);
+	
 }
 
 //function to add markers for each bus
