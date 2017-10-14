@@ -8,7 +8,8 @@ require_once 'database.php';
 <script>
     $(document).ready(function() {
 		$('#route_picker').on('change',function(){
-			var query_route = apiQuery();
+			var route = apiQuery();
+			console.log(route);
 			
 		
 		})

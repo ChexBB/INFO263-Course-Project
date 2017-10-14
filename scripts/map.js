@@ -20,11 +20,32 @@ function apiQuery() {
 	//alert($.get("vehicle_query.php"));
 	
 	$.ajax({
-        type: 'post',
+        type: 'POST',
         url: 'vehicle_query.php',
         data: {query_route : query_route},
-        success: function( data ) {
-            console.log( data );
+		dataType: 'text',
+        success: function(data) {
+            console.log(data);
         }
     });
+	
 }
+
+//function to add markers for each bus
+//@param busLocations array containing all the buses to be displayed
+//need to call from processJSON somehow? 
+function showVehicles(busLocation) {
+    var bounds = new google.maps.LatLngBounds();
+
+    //removes of all existing markers
+    markers.forEach(function (clear) {
+        clear.setMap(null);
+    });
+
+    busLocation.forEach(function (bus) {
+        var busMarker = new google.maps.Marker({
+            position: { lat: bus.latitude, lng: bus.longitude },
+            title: 'Bus: ' + bus.vehicle_id,
+            map: map,
+            icon: icon
+        });
