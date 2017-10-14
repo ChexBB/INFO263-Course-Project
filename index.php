@@ -30,7 +30,7 @@ require_once 'database.php';
 	<h1>GoBus Transport App   <img src="Media/Auckland_Transport_Logo.png" alt="Logo" width="80" height="80" align="middle"></font></h1>
   	
 	<select dropMenu Name='route_picker' id='route_picker'> <!--Initialize drop down--> 
-		<option id="default_route" value="set">By Route</option>
+		<option id="default_route" value="set">Select</option>
 		<?php
 		populateRoutes($conn);
 		?>	
