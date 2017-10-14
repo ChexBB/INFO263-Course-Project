@@ -2,11 +2,10 @@
 require_once 'include/config.php';
 require_once 'requests.php';
 require_once 'database.php';
-require_once 'Class/vehicle.php';
 
-$url = "https://api.at.govt.nz/v2/public/realtime/vehiclelocations";
 /**
 
+$url = "https://api.at.govt.nz/v2/public/realtime/vehiclelocations";
 # if we had query parametets say, trip_ids, we would include an array of them like below
 
 $route_ids = array("09151-20170928152758_v59.3");
@@ -30,9 +29,9 @@ function processJSON($json)
 		$busInfo = json_decode($json[$i]);
 		#iterate through busses on the trip
 		for($j = 0; $j < count($busInfo); $j++) {
-			$id = $busInfo [$j]->vehicle->vehicle->id;
-			$longitude = $busInfo [$j]->vehicle->vehicle->longitude;
-			$latitude = $busInfo [$j]->vehicle->vehicle->latitude;
+			$id = $busData[$j]->vehicle->vehicle->id;
+			$longitude = $busData[$j]->vehicle->vehicle->longitude;
+			$latitude = $busData[$j]-> vehicle->vehicle->latitude;
 			
 			array_push($allBusses, array('id' => $id, 'long' => $longitude, 'lat' => $latitude));
 		}
@@ -44,15 +43,22 @@ function processJSON($json)
 if(isset($_REQUEST["r"]))
 {
 	$param = $_REQUEST["r"];
-	//echo $param;
-	$trips = getTripIds($conn, $param);
-	$trip_array = array("tripid" => $trips);
-	$apiJSON = apiCall($APIKey, $url, $trip_array);
+	echo $param;
+	/**#SQL statement to get trip ID
+	$query = $conn->prepare('SELECT DISTINCT trip_id FROM trips, routes WHERE routes.route_id = trips.route_id AND routes.route_short_name = '".$param."' ');
+	$query->bind_param('s', $param);
+	$query->execute();
+	$result = $query->get_result();
+	$trips = getTripIds($result); #what is this function?
+	$conn->close();
+
+	$trip_array = array("tripid" -> $trips);
+	$apiJSOn = apiCall($APIKey, $url, $trip_array);
 	$busArray = processJSON($apiJSON);
 	$busJSON = json_encode($busArray);
 	header('Content-Type: application/json');
 	echo "This is printing from vehicle_query.php";
-	echo($busJSON);
+	echo($busJSON);**/
 }
 
 ?>
