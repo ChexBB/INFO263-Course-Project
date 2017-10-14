@@ -44,3 +44,16 @@ body > .container {
 	height: 100%;
 	font-size: 25px;
 }
+
+h1 {
+	padding:5px;
+	text-align:center;
+	font-size:60px;
+	font-family:Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+}
+
+select {
+	position:absolute;
+	right:50px;
+}
+
