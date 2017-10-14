@@ -36,6 +36,7 @@ body > .container {
 #map {
     height: 600px;
     position: fixed;
+    padding-top:60px;
 }
 
 #header {
