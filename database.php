@@ -19,6 +19,7 @@ Something went wrong :/
 _END;
 }
 
+//function to get all routes via short name and populate the dropdown menu
 function populateRoutes($conn)
 {
 	$fetch_query = $conn->query("SELECT distinct routes.route_short_name FROM akl_transport.routes ORDER BY route_short_name ASC");
@@ -27,27 +28,25 @@ function populateRoutes($conn)
 	while ($row = $fetch_query->fetch_assoc()) {
 		echo '<option value="'.$row['route_short_name'].'">'.$row['route_short_name'].'</option>';
 	}
-	
+	$fetch_query->close();
 }
 
+//function to get all trip ids for a paricular route and return them as an array
 function getTripIds($conn, $param)
 {
 	#SQL statement to get trip ID
+	#need to check if @param - route short name is entered as a string, otherwise we get too many results
 	$results = array();
     $get_trip_query = "SELECT DISTINCT trip_id FROM trips JOIN routes on routes.route_id = trips.route_id WHERE routes.route_id = trips.route_id AND routes.route_short_name = '".$param."'";
     $result = $conn->query($get_trip_query);
-    if (!$result)
-    {
-        fatalError($conn->error);
-    }
-    else {
-        while ($row = $result ->fetch_array((MYSQLI_ASSOC))) {
-			$trip = $row['trip_id'];
-			$results = $trip;
-		}
-
-        $result->close();
-    }
+    while ($row = $result ->fetch_array((MYSQLI_ASSOC))) {
+		array_push($results, $row['trip_id']);
+	}
+    $result->close();
+    
+	//for($i = 0; $i < count($results); $i++) {
+		//echo $results[$i]."\n";
+	//}
     return $results;
 }
 
