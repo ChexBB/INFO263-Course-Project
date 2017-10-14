@@ -21,20 +21,13 @@ _END;
 
 function populateRoutes($conn)
 {
-	//under-gwond
 	$fetch_query = $conn->query("SELECT distinct routes.route_short_name FROM akl_transport.routes ORDER BY route_short_name ASC");
-	if (!$result)
-    {
-        fatalError($conn->error);
-    }
-    else {
-		//under-gwond	
-		while ($row = $fetch_query->fetch_assoc()) {
-			echo '<option value="'.$row['route_short_name'].'">'.$row['route_short_name'].'</option>';
-		}
-		
-		$result ->close();
+
+	//under-gwond
+	while ($row = $fetch_query->fetch_assoc()) {
+		echo '<option value="'.$row['route_short_name'].'">'.$row['route_short_name'].'</option>';
 	}
+	
 }
 
 function getTripIds($conn, $param)
