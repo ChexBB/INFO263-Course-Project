@@ -31,7 +31,7 @@ function processJSON($json)
 		for($j = 0; $j < count($busInfo); $j++) {
 			$id = $busData[$j]->vehicle->vehicle->id;
 			$longitude = $busData[$j]->vehicle->vehicle->longitude;
-			$latitude = $busData[$j]->vehicle->vehicle->latitude;
+			$latitude = $busData[$j]-> vehicle->vehicle->latitude;
 			
 			array_push($allBusses, array('id' => $id, 'long' => $longitude, 'lat' => $latitude));
 		}
