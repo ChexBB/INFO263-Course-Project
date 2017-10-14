@@ -9,9 +9,6 @@ require_once 'database.php';
     $(document).ready(function() {
 		$('#route_picker').on('change',function(){
 			var route = apiQuery();
-			console.log(route);
-			
-		
 		})
     });
 </script>

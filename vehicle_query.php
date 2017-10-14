@@ -40,10 +40,11 @@ function processJSON($json)
 	return($allBusses);
 }
 
-if(isset($_POST['query_route']))
+if(isset($_REQUEST["r"]))
 {
-	$param = $_POST['query_route'];
-	#SQL statement to get trip ID
+	$param = $_REQUEST["r"];
+	echo $param;
+	/**#SQL statement to get trip ID
 	$query = $conn->prepare('SELECT DISTINCT trip_id FROM trips, routes WHERE routes.route_id = trips.route_id AND routes.route_short_name = '".$param."' ');
 	$query->bind_param('s', $param);
 	$query->execute();
@@ -57,7 +58,7 @@ if(isset($_POST['query_route']))
 	$busJSON = json_encode($busArray);
 	header('Content-Type: application/json');
 	echo "This is printing from vehicle_query.php";
-	echo($busJSON);
+	echo($busJSON);**/
 }
 
 ?>

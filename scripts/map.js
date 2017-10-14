@@ -16,19 +16,16 @@ function refreshMap() {
 
 function apiQuery() {
 	var query_route = $('#route_picker').val();
+	var response = "";
 	alert(query_route); //test if route is selected
 	//alert($.get("vehicle_query.php"));
-	
-	$.ajax({
-        type: 'POST',
-        url: 'vehicle_query.php',
-        data: {query_route : query_route},
-		dataType: 'text',
-        success: function(data) {
-            console.log(data);
-        }
-    });
-	
+	var xmlhttp = new XMLHttpRequest();
+	    if (this.readyState == 4 && this.status == 200) {
+	    	response = document.getElementByTagName("body").innerHTML = this.responseText;
+	    }
+        xmlhttp.open("GET", "vehicle_query.php?r=" + query_route, true);
+        xmlhttp.send();
+	alert(response);
 }
 
 //function to add markers for each bus
