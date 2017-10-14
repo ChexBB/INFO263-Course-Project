@@ -21,6 +21,7 @@ _END;
 
 function populateRoutes($conn)
 {
+	//under-gwond
 	$fetch_query = $conn->query("SELECT distinct routes.route_short_name FROM akl_transport.routes ORDER BY route_short_name ASC");
 	if (!$result)
     {
