@@ -1,5 +1,5 @@
 <?php
-//This is the database.php file for INFO263 by GroupDev N
+// This is the database.php file for INFO263 by GroupDev N
 require_once 'include/config.php';
 
 $conn = new mysqli($hostname, $username, $password, $database);
