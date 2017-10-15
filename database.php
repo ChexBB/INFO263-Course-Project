@@ -32,6 +32,9 @@ function populateRoutes($conn)
 	$fetch_query->close();
 }
 
+//Another possible SQL query for tripsids? --DELETE AFTER--
+//$get_trip_query = 'SELECT DISTINCT trip_id FROM trips, routes WHERE routes.route_id = trips.route_id AND routes.route_short_name = '".$param."'';
+
 //function to get all trip ids for a paricular route and return them as an array
 function getTripIds($conn, $param)
 {
