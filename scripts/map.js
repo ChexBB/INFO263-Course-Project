@@ -35,6 +35,7 @@ function deleteMarkers() {
 //This is the API Query function that we 
 function apiQuery() {
 	var query_route = $('#route_picker').val();
+				alert(vehicle_array[0]);
 	var response;
 	var ajaxRequest = new XMLHttpRequest();
 	var vehicle_array;
@@ -70,27 +71,12 @@ function apiQuery() {
 				});
 				markers.push(marker);
 			}
-   		}
-   	}
-    ajaxRequest.open("GET", "vehicle_query.php?r=" + query_route, true);
-    ajaxRequest.send();
-	
+		}
+		ajaxRequest.open("GET", "vehicle_query.php?r=" + query_route, true);
+		ajaxRequest.send();
+	}
 }
 
-//function to add markers for each bus
-//@param busLocations array containing all the buses to be displayed
-//need to call from processJSON somehow? 
-/**function showVehicles(busLocation) {
-    var bounds = new google.maps.LatLngBounds();
-
-    //removes of all existing markers
-    markers.forEach(function (clear) {
-        clear.setMap(null);
-    });
-
-    busLocation.forEach(function (bus) {
-        var busMarker = new google.maps.Marker({
-            position: { lat: bus.latitude, lng: bus.longitude },
-            title: 'Bus: ' + bus.vehicle_id, map: map;
-        }); **/
+setInterval(function(){
+	apiQuery()}, 30000);
        
