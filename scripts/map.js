@@ -1,4 +1,4 @@
-<!-- This is the map.js file for INFO263 by GroupDev N -->
+//This is the map.js file for INFO263 by GroupDev N
 
 //initialising variables
 var markers = [];
@@ -35,41 +35,42 @@ function deleteMarkers() {
 //This is the API Query function that we 
 function apiQuery() {
 	var query_route = $('#route_picker').val();
+	if (query_route != "set") {
+		var response;
+		var ajaxRequest = new XMLHttpRequest();
+		var vehicle_array;
+		ajaxRequest.onreadystatechange = function(){
+			if(ajaxRequest.readyState == 4){
+				response = document.getElementsByTagName('body');
+				response.innerHTML = ajaxRequest.responseText;
+				alert(response.innerHTML);
+				//We are splitting the response from the API and adding it to an array
+				vehicle_array = response.innerHTML.split("},{");
+				vehicle_array[0] = vehicle_array[0].substr(2);
+				vehicle_array[vehicle_array.length-1] = vehicle_array[vehicle_array.length-1].slice(0, (vehicle_array[vehicle_array.length-1].length-2));
 				alert(vehicle_array[0]);
-	var response;
-	var ajaxRequest = new XMLHttpRequest();
-	var vehicle_array;
-	ajaxRequest.onreadystatechange = function(){
-    	if(ajaxRequest.readyState == 4){
-    		response = document.getElementsByTagName('body');
-    		response.innerHTML = ajaxRequest.responseText;
-    		alert(response.innerHTML);
-    		//We are splitting the response from the API and adding it to an array
-			vehicle_array = response.innerHTML.split("},{");
-			vehicle_array[0] = vehicle_array[0].substr(2);
-			vehicle_array[vehicle_array.length-1] = vehicle_array[vehicle_array.length-1].slice(0, (vehicle_array[vehicle_array.length-1].length-2));
-			alert(vehicle_array[0]);
-			alert(vehicle_array[vehicle_array.length-1]);
-			alert(vehicle_array.length);
-			deleteMarkers();
-			
-			var lngN;
-			var commaPos;
-			var latN;
-			var latLng;
-			var marker;
-			//for loop to assign the variables required
-			for (var i = 0; i <= vehicle_array.length-1; i++) {
-				firstSemi = vehicle_array[i].indexOf(':');
-				lngN = vehicle_array[i].indexOf(':',firstSemi+1)+1;
-				commaPos = vehicle_array[i].indexOf(',', lngN+1)+1;
-				latN = vehicle_array[i].indexOf(':',lngN+1)+1;
-				latLng = {lat: parseFloat(vehicle_array[i].slice(latN, vehicle_array[i].length-1)), lng: parseFloat(vehicle_array[i].slice(lngN, commaPos))};
-				marker = new google.maps.Marker({
-					position: latLng,
-					map: map
-				});
-				markers.push(marker);
+				alert(vehicle_array[vehicle_array.length-1]);
+				alert(vehicle_array.length);
+				deleteMarkers();
+				
+				var lngN;
+				var commaPos;
+				var latN;
+				var latLng;
+				var marker;
+				//for loop to assign the variables required
+				for (var i = 0; i <= vehicle_array.length-1; i++) {
+					firstSemi = vehicle_array[i].indexOf(':');
+					lngN = vehicle_array[i].indexOf(':',firstSemi+1)+1;
+					commaPos = vehicle_array[i].indexOf(',', lngN+1)+1;
+					latN = vehicle_array[i].indexOf(':',lngN+1)+1;
+					latLng = {lat: parseFloat(vehicle_array[i].slice(latN, vehicle_array[i].length-1)), lng: parseFloat(vehicle_array[i].slice(lngN, commaPos))};
+					marker = new google.maps.Marker({
+						position: latLng,
+						map: map
+					});
+					markers.push(marker);
+				}
 			}
 		}
 		ajaxRequest.open("GET", "vehicle_query.php?r=" + query_route, true);

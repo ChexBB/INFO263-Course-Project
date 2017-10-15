@@ -1,4 +1,4 @@
-<!-- This is the example_request.php file for INFO263 by GroupDev N -->
+
 
 <?php //database.php
 require_once 'include/config.php';

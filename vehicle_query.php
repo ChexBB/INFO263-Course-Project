@@ -1,6 +1,5 @@
-<!-- This is the vehicle_query.php file for INFO263 by GroupDev N -->
-
 <?php //database.php
+//This is the vehicle_query.php file for INFO263 by GroupDev N
 require_once 'include/config.php';
 require_once 'requests.php';
 require_once 'database.php';
