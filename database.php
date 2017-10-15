@@ -1,3 +1,5 @@
+<!-- This is the database.php file for INFO263 by GroupDev N -->
+
 <?php
 require_once 'include/config.php';
 
@@ -9,6 +11,7 @@ if ($conn->connect_error)
     return;
 }
 
+//Function that produces an error message if there is indeed an error
 function fatalError($error)
 {
     $message = mysql_error();
@@ -24,7 +27,6 @@ function populateRoutes($conn)
 {
 	$fetch_query = $conn->query("SELECT distinct routes.route_short_name FROM akl_transport.routes ORDER BY route_short_name ASC");
 
-	//under-gwond
 	while ($row = $fetch_query->fetch_assoc()) {
 		echo '<option value="'.$row['route_short_name'].'">'.$row['route_short_name'].'</option>';
 	}
