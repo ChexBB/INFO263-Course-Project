@@ -3,7 +3,7 @@ require_once 'include/config.php';
 require_once 'requests.php';
 require_once 'database.php';
 
-$url = "https://api.at.govt.nz/v2/public/realtime/vehiclelocations";
+
 /**
 # if we had query parametets say, trip_ids, we would include an array of them like below
 $route_ids = array("09151-20170928152758_v59.3");
