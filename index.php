@@ -1,7 +1,5 @@
-<!-- This is the index.php file for INFO263 GroupDev N -->
-
 <?php
-
+// This is the index.php file for INFO263 GroupDev N
 $active = "home";
 require_once 'include/header.php';
 require_once 'database.php';
@@ -10,7 +8,7 @@ require_once 'database.php';
 
 <script>
 
-	//We use a .ready here so that our function is ready once the page has finished loading.
+	// We use a .ready here so that our function is ready once the page has finished loading.
     $(document).ready(function() {
 		$('#route_picker').on('change',function(){
 			var route = apiQuery();
@@ -23,7 +21,7 @@ require_once 'database.php';
 
   <head>
   
-  	<!-- CSS relavent code goes here -->
+  	<!--CSS relavent code goes here -->
 	<link rel="stylesheet" href="CSS/master.css" type="text/css">
 	<script async defer
 	  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBajjU1EoGpVz0QKgSL2c_aS6vJDb8N5cA&callback=initMap">
@@ -42,7 +40,7 @@ require_once 'database.php';
   	<!--Initialize drop down menu--> 
 	<select dropMenu Name='route_picker' id='route_picker'> 
 		<option id="default_route" value="set">Select</option>
-		<!-- We have PHP code here so that we can populate the drop down menu with all the routes available-->
+		<!--We have PHP code here so that we can populate the drop down menu with all the routes available-->
 		<?php
 		populateRoutes($conn);
 		?>	
