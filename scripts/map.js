@@ -43,14 +43,10 @@ function apiQuery() {
 			if(ajaxRequest.readyState == 4){
 				response = document.getElementsByTagName('body');
 				response.innerHTML = ajaxRequest.responseText;
-				alert(response.innerHTML);
 				// We are splitting the response from the API and adding it to an array
 				vehicle_array = response.innerHTML.split("},{");
 				vehicle_array[0] = vehicle_array[0].substr(2);
 				vehicle_array[vehicle_array.length-1] = vehicle_array[vehicle_array.length-1].slice(0, (vehicle_array[vehicle_array.length-1].length-2));
-				alert(vehicle_array[0]);
-				alert(vehicle_array[vehicle_array.length-1]);
-				alert(vehicle_array.length);
 				deleteMarkers();
 				// Initialising variables
 				var lngN;
@@ -65,10 +61,20 @@ function apiQuery() {
 					commaPos = vehicle_array[i].indexOf(',', lngN+1)+1;
 					latN = vehicle_array[i].indexOf(':',lngN+1)+1;
 					latLng = {lat: parseFloat(vehicle_array[i].slice(latN, vehicle_array[i].length-1)), lng: parseFloat(vehicle_array[i].slice(lngN, commaPos))};
+					
+					var infowindow = new google.maps.InfoWindow({
+					  content: vehicle_array[i]
+					});
+					
 					marker = new google.maps.Marker({
 						position: latLng,
 						map: map,
 					});
+					
+					marker.addListener('click', function() {
+					  infowindow.open(map, marker);
+					});
+					
 					map.panTo(latLng); 
           			map.setZoom(11) 
 					markers.push(marker);
