@@ -1,8 +1,9 @@
 var markers = [];
+var map;
 
 function initMap() {
 	var auckland = {lat: -36.849316, lng: 174.766249};
-	var map = new google.maps.Map(document.getElementById('map'), {
+	map = new google.maps.Map(document.getElementById('map'), {
 	  zoom: 12,
 	  center: auckland
 	});
@@ -48,12 +49,12 @@ function apiQuery() {
 			var latN;
 			var latLng;
 			var marker;
-			for (var i = 0; i <= vehicle_array.length; i++) {
+			for (var i = 0; i <= vehicle_array.length-1; i++) {
 				firstSemi = vehicle_array[i].indexOf(':');
 				lngN = vehicle_array[i].indexOf(':',firstSemi+1)+1;
 				commaPos = vehicle_array[i].indexOf(',', lngN+1)+1;
 				latN = vehicle_array[i].indexOf(':',lngN+1)+1;
-				latLng = {lat: parseInt(vehicle_array[i].slice(latN, vehicle_array[i].length-1)), lng: parseInt(vehicle_array[i].slice(lngN, commaPos))};
+				latLng = {lat: parseFloat(vehicle_array[i].slice(latN, vehicle_array[i].length-1)), lng: parseFloat(vehicle_array[i].slice(lngN, commaPos))};
 				marker = new google.maps.Marker({
 					position: latLng,
 					map: map
