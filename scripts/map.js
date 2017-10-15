@@ -57,6 +57,7 @@ function apiQuery() {
 			var latN;
 			var latLng;
 			var marker;
+			//for loop to assign the variables required
 			for (var i = 0; i <= vehicle_array.length-1; i++) {
 				firstSemi = vehicle_array[i].indexOf(':');
 				lngN = vehicle_array[i].indexOf(':',firstSemi+1)+1;
