@@ -25,7 +25,14 @@ function apiQuery() {
     		response.innerHTML = ajaxRequest.responseText;
     		alert(response.innerHTML);
 			vehicle_array = response.innerHTML.split("},{");
+			vehicle_array[0] = vehicle_array[0].substr(2);
+			vehicle_array[vehicle_array.length-1] = vehicle_array[vehicle_array.length-1].slice(0, (vehicle_array[vehicle_array.length-1].length-2));
 			alert(vehicle_array[0]);
+			alert(vehicle_array[vehicle_array.length-1]);
+			alert(vehicle_array.length);
+			//for (var i = 1; i <= vehicle_array.length; i++) {
+				
+			//}
    		}
    	}
     ajaxRequest.open("GET", "vehicle_query.php?r=" + query_route, true);
