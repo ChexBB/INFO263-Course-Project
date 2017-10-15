@@ -47,7 +47,7 @@ if(isset($_REQUEST["r"]))
 	$busArray = processJSON($apiJSON);
 	$busJSON = json_encode($busArray);
 	header('Content-Type: application/json');
-	echo "All bus locations for route " . $param . ": ";
+	//echo "All bus locations for route " . $param . ": ";
 	echo $busJSON;
 }
 

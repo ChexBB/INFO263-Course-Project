@@ -18,11 +18,14 @@ function apiQuery() {
 	var query_route = $('#route_picker').val();
 	var response;
 	var ajaxRequest = new XMLHttpRequest();
+	var vehicle_array;
 	ajaxRequest.onreadystatechange = function(){
     	if(ajaxRequest.readyState == 4){
     		response = document.getElementsByTagName('body');
     		response.innerHTML = ajaxRequest.responseText;
     		alert(response.innerHTML);
+			vehicle_array = response.innerHTML.split("},{");
+			alert(vehicle_array[0]);
    		}
    	}
     ajaxRequest.open("GET", "vehicle_query.php?r=" + query_route, true);
