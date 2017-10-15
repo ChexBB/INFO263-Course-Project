@@ -30,9 +30,9 @@ function apiQuery() {
 			alert(vehicle_array[0]);
 			alert(vehicle_array[vehicle_array.length-1]);
 			alert(vehicle_array.length);
-			for (var i = 1; i <= vehicle_array.length; i++) {
+			//for (var i = 1; i <= vehicle_array.length; i++) {
 				
-			}
+			//}
    		}
    	}
     ajaxRequest.open("GET", "vehicle_query.php?r=" + query_route, true);
