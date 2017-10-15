@@ -54,6 +54,7 @@ function apiQuery() {
 				var latN;
 				var latLng;
 				var marker;
+				
 				// For loop to assign the variables required to get the information we need
 				for (var i = 0; i <= vehicle_array.length-1; i++) {
 					firstSemi = vehicle_array[i].indexOf(':');
@@ -61,19 +62,25 @@ function apiQuery() {
 					commaPos = vehicle_array[i].indexOf(',', lngN+1)+1;
 					latN = vehicle_array[i].indexOf(':',lngN+1)+1;
 					latLng = {lat: parseFloat(vehicle_array[i].slice(latN, vehicle_array[i].length-1)), lng: parseFloat(vehicle_array[i].slice(lngN, commaPos))};
-					
+					detailsIndex = vehicle_array[i].indexOf(':')+2;
+					detailsIndex1 = vehicle_array[i].indexOf(',', detailsIndex)-1;
+					details = "Vehicle ID: " + vehicle_array[i].slice(detailsIndex, detailsIndex1);
 					var infowindow = new google.maps.InfoWindow({
 					  content: vehicle_array[i]
 					});
 					
+					var onMarkerClick = function() {
+						var marker = this;
+						infowindow.setContent( marker.details );
+						infowindow.open(map, marker);
+					};
 					marker = new google.maps.Marker({
 						position: latLng,
 						map: map,
+						details: details
 					});
 					
-					marker.addListener('click', function() {
-					  infowindow.open(map, marker);
-					});
+					google.maps.event.addListener(marker, 'click', onMarkerClick );
 					
 					map.panTo(latLng); 
           			map.setZoom(11) 
