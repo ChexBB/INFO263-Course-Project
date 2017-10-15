@@ -3,7 +3,6 @@
 //initialising variables
 var markers = [];
 var map;
-var icon = 'https://www.google.co.nz/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&ved=0ahUKEwjMuNvpxvLWAhWmwFQKHTJGC2MQjBwIBA&url=http%3A%2F%2Ffiles.softicons.com%2Fdownload%2Fweb-icons%2Fawt-travel-blue-icons-by-awt-media%2Fpng%2F200x200%2FAWT-Bus.png&psig=AOvVaw12sGHNd4YF8EZ6WcsPgL4V&ust=1508154117055894';
 //function to intialise the map        
 function initMap() {
 	//We have the variable auckland set up with its long/lat values so the the default centering of the map is on the city of Auckland
@@ -36,6 +35,7 @@ function deleteMarkers() {
 function apiQuery() {
 	var query_route = $('#route_picker').val();
 	if (query_route != "set") {
+		
 		var response;
 		var ajaxRequest = new XMLHttpRequest();
 		var vehicle_array;
@@ -67,8 +67,10 @@ function apiQuery() {
 					latLng = {lat: parseFloat(vehicle_array[i].slice(latN, vehicle_array[i].length-1)), lng: parseFloat(vehicle_array[i].slice(lngN, commaPos))};
 					marker = new google.maps.Marker({
 						position: latLng,
-						map: map
+						map: map,
 					});
+					map.panTo(latLng); 
+          			map.setZoom(11) 
 					markers.push(marker);
 				}
 			}
