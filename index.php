@@ -1,4 +1,5 @@
 <?php
+
 $active = "home";
 require_once 'include/header.php';
 require_once 'database.php';
@@ -42,6 +43,7 @@ require_once 'database.php';
   </body>
   
 </html>
+
 <?php
 require_once 'include/footer.php';
 ?>
