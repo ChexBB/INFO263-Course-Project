@@ -1,6 +1,7 @@
-<!-- This is the requests.php file for INFO263 by GroupDev N -->
+
 
 <?php
+//This is the requests.php file for INFO263 by GroupDev N
 /**
  * Max length for a uri, lengths over 2000 are rejected by the sever.
  * @var integer
