@@ -1,5 +1,6 @@
 var markers = [];
 var map;
+var icon = 'https://www.google.co.nz/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&ved=0ahUKEwjMuNvpxvLWAhWmwFQKHTJGC2MQjBwIBA&url=http%3A%2F%2Ffiles.softicons.com%2Fdownload%2Fweb-icons%2Fawt-travel-blue-icons-by-awt-media%2Fpng%2F200x200%2FAWT-Bus.png&psig=AOvVaw12sGHNd4YF8EZ6WcsPgL4V&ust=1508154117055894';
 
 function initMap() {
 	var auckland = {lat: -36.849316, lng: 174.766249};
@@ -68,6 +69,8 @@ function apiQuery() {
 		}
 		ajaxRequest.open("GET", "vehicle_query.php?r=" + query_route, true);
 		ajaxRequest.send();
+	} else {
+		deleteMarkers();
 	}
 }
 
