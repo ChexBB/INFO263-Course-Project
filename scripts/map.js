@@ -69,6 +69,7 @@ function apiQuery() {
 					marker = new google.maps.Marker({
 						position: latLng,
 						map: map,
+						icon: "Media/bus1.svg",
 					});
 					
 					marker.addListener('click', function() {
