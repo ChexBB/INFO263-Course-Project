@@ -41,7 +41,8 @@ function getTripIds($conn, $param)
     $get_trip_query = "SELECT DISTINCT trip_id FROM trips JOIN routes on routes.route_id = trips.route_id WHERE routes.route_id = trips.route_id AND routes.route_short_name = '".$param."'";
     $result = $conn->query($get_trip_query);
     while ($row = $result ->fetch_array((MYSQLI_ASSOC))) {
-		array_push($results, $row['trip_id']);
+		$results[] = $row['trip_id'];
+		//array_push($results, $row['trip_id']);
 	}
     $result->close();
     
