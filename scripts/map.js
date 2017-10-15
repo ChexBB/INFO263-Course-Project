@@ -1,18 +1,30 @@
+var markers = [];
+
 function initMap() {
 	var auckland = {lat: -36.849316, lng: 174.766249};
 	var map = new google.maps.Map(document.getElementById('map'), {
 	  zoom: 12,
 	  center: auckland
 	});
-	var marker = new google.maps.Marker({
-	  position: auckland,
-	  map: map
-	});
 }
 
 function refreshMap() {
 	google.maps.event.trigger(map, 'resize');
 }
+
+
+function setMapOnAll(map) {
+	for (var i = 0; i < markers.length; i++) {
+		markers[i].setMap(map);
+    }
+}
+
+
+function deleteMarkers() {
+	setMapOnAll(null);
+	markers = [];
+}
+
 
 function apiQuery() {
 	var query_route = $('#route_picker').val();
@@ -30,9 +42,24 @@ function apiQuery() {
 			alert(vehicle_array[0]);
 			alert(vehicle_array[vehicle_array.length-1]);
 			alert(vehicle_array.length);
-			//for (var i = 1; i <= vehicle_array.length; i++) {
-				
-			//}
+			deleteMarkers();
+			var lngN;
+			var commaPos;
+			var latN;
+			var latLng;
+			var marker;
+			for (var i = 0; i <= vehicle_array.length; i++) {
+				firstSemi = vehicle_array[i].indexOf(':');
+				lngN = vehicle_array[i].indexOf(':',firstSemi+1)+1;
+				commaPos = vehicle_array[i].indexOf(',', lngN+1)+1;
+				latN = vehicle_array[i].indexOf(':',lngN+1)+1;
+				latLng = {lat: parseInt(vehicle_array[i].slice(latN, vehicle_array[i].length-1)), lng: parseInt(vehicle_array[i].slice(lngN, commaPos))};
+				marker = new google.maps.Marker({
+					position: latLng,
+					map: map
+				});
+				markers.push(marker);
+			}
    		}
    	}
     ajaxRequest.open("GET", "vehicle_query.php?r=" + query_route, true);
