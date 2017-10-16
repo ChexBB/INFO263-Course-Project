@@ -1,12 +1,16 @@
 <?php 
-// database.php
 // This is the vehicle_query.php file for INFO263 by GroupDev N
 
 require_once 'include/config.php';
 require_once 'requests.php';
 require_once 'database.php';
 
-
+/**
+function used to take in json format input of apicall results and decode each element to find the id, longitude
+and latitude of each trip on a route.
+@param $json json encoded array of results generated from the apiCall function
+@return array $allBuses array of decoded json results containing ids, longitude and latitude locations
+**/
 function processJSON($json)
 {
 	$allBusses = array();
@@ -28,6 +32,11 @@ function processJSON($json)
 	return($allBusses);
 }
 
+/**
+this code is executed when an ajax request is sent to vehicle_query.php from map.js
+checks to see if the request has been set with an input from the user and assigns it a variable param.
+executes the processJSON function and echos the results back to map.js for the map markers to be displayed
+**/
 if(isset($_REQUEST["r"]))
 {
 	$param = $_REQUEST["r"];
@@ -39,7 +48,6 @@ if(isset($_REQUEST["r"]))
 	$busArray = processJSON($apiJSON);
 	$busJSON = json_encode($busArray);
 	header('Content-Type: application/json');
-	// echo "All bus locations for route " . $param . ": ";
 	echo $busJSON;
 }
 
