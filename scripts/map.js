@@ -48,44 +48,51 @@ function apiQuery() {
 				vehicle_array[0] = vehicle_array[0].substr(2);
 				vehicle_array[vehicle_array.length-1] = vehicle_array[vehicle_array.length-1].slice(0, (vehicle_array[vehicle_array.length-1].length-2));
 				deleteMarkers();
+				console.log(response.innerHTML);
 				// Initialising variables
 				var lngN;
 				var commaPos;
 				var latN;
 				var latLng;
 				var marker;
+				var checkString = response.innerHTML.replace(/\s+/g, '');
 				
 				// For loop to assign the variables required to get the information we need
-				for (var i = 0; i <= vehicle_array.length-1; i++) {
-					firstSemi = vehicle_array[i].indexOf(':');
-					lngN = vehicle_array[i].indexOf(':',firstSemi+1)+1;
-					commaPos = vehicle_array[i].indexOf(',', lngN+1)+1;
-					latN = vehicle_array[i].indexOf(':',lngN+1)+1;
-					latLng = {lat: parseFloat(vehicle_array[i].slice(latN, vehicle_array[i].length-1)), lng: parseFloat(vehicle_array[i].slice(lngN, commaPos))};
-					detailsIndex = vehicle_array[i].indexOf(':')+2;
-					detailsIndex1 = vehicle_array[i].indexOf(',', detailsIndex)-1;
-					details = "Vehicle ID: " + vehicle_array[i].slice(detailsIndex, detailsIndex1);
-					var infowindow = new google.maps.InfoWindow({
-					  content: vehicle_array[i]
-					});
-					
-					var onMarkerClick = function() {
-						var marker = this;
-						infowindow.setContent( marker.details );
-						infowindow.open(map, marker);
-					};
-					marker = new google.maps.Marker({
-						position: latLng,
-						map: map,
-						icon: "Media/bus1.svg",
-						details: details
-					});
-					
-					google.maps.event.addListener(marker, 'click', onMarkerClick );
-					
-					map.panTo(latLng); 
-          			map.setZoom(11) 
-					markers.push(marker);
+				if (checkString != '[]'){
+					for (var i = 0; i <= vehicle_array.length-1; i++) {
+						firstSemi = vehicle_array[i].indexOf(':');
+						lngN = vehicle_array[i].indexOf(':',firstSemi+1)+1;
+						commaPos = vehicle_array[i].indexOf(',', lngN+1)+1;
+						latN = vehicle_array[i].indexOf(':',lngN+1)+1;
+						latLng = {lat: parseFloat(vehicle_array[i].slice(latN, vehicle_array[i].length-1)), lng: parseFloat(vehicle_array[i].slice(lngN, commaPos))};
+						detailsIndex = vehicle_array[i].indexOf(':')+2;
+						detailsIndex1 = vehicle_array[i].indexOf(',', detailsIndex)-1;
+						details = "Vehicle ID: " + vehicle_array[i].slice(detailsIndex, detailsIndex1);
+						
+						var infowindow = new google.maps.InfoWindow({
+						  content: vehicle_array[i]
+						});
+						
+						var onMarkerClick = function() {
+							var marker = this;
+							infowindow.setContent( marker.details );
+							infowindow.open(map, marker);
+						};
+						marker = new google.maps.Marker({
+							position: latLng,
+							map: map,
+							icon: "Media/bus1.svg",
+							details: details
+						});
+						
+						google.maps.event.addListener(marker, 'click', onMarkerClick );
+						
+						map.panTo(latLng); 
+	          			map.setZoom(11) 
+						markers.push(marker);
+					}
+				} else {
+					alert("No buses found on this route :(");
 				}
 			}
 		}
