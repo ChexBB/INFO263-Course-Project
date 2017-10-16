@@ -11,9 +11,10 @@ and latitude of each trip on a route.
 @param $json json encoded array of results generated from the apiCall function
 @return array $allBuses array of decoded json results containing ids, longitude and latitude locations
 **/
-function processJSON($json)
+function getBusInfo($json)
 {
 	$allBusses = array();
+	
 	# loop to iterate all trips on a route
 	for($i = 0; $i < count($json); $i++){
 		$busData = json_decode($json[$i]);
@@ -24,8 +25,9 @@ function processJSON($json)
 				$id = $busInfo[$j]->vehicle->vehicle->id;
 				$longitude = $busInfo[$j]->vehicle->position->longitude;
 				$latitude = $busInfo[$j]-> vehicle->position->latitude;
-				array_push($allBusses, array('id' => $id, 'longitude' => $longitude, 'latitude' => $latitude));
 				
+				//push each variable into the associative array with pair values
+				array_push($allBusses, array('id' => $id, 'longitude' => $longitude, 'latitude' => $latitude));	
 			}
 		}
 	}
@@ -42,13 +44,12 @@ if(isset($_REQUEST["r"]))
 	$param = $_REQUEST["r"];
 	$trip_ids = getTripIds($conn, $param);
 	$conn->close();
-	
-	$params = array("trip_id" => $trip_ids);
+	$params = array("tripid" => $trip_ids);
 	$apiJSON = apiCall($APIKey, $url, $params);
-	$busArray = processJSON($apiJSON);
-	$busJSON = json_encode($busArray);
+	$busArray = getBusInfo($apiJSON);
+	$busArrayJSON = json_encode($busArray);
 	header('Content-Type: application/json');
-	echo $busJSON;
+	echo $busArrayJSON ;
 }
 
 ?>

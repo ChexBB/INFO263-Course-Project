@@ -32,26 +32,20 @@ function populateRoutes($conn)
 	$fetch_query->close();
 }
 
-//Another possible SQL query for tripsids? --DELETE AFTER--
-//$get_trip_query = 'SELECT DISTINCT trip_id FROM trips, routes WHERE routes.route_id = trips.route_id AND routes.route_short_name = '".$param."'';
-
 //function to get all trip ids for a paricular route and return them as an array
 function getTripIds($conn, $param)
 {
 	#SQL statement to get trip ID
-	#need to check if @param - route short name is entered as a string, otherwise we get too many results
 	$results = array();
-    $get_trip_query = "SELECT DISTINCT trip_id FROM trips JOIN routes on routes.route_id = trips.route_id WHERE routes.route_id = trips.route_id AND routes.route_short_name = '".$param."'";
+    $get_trip_query = "SELECT DISTINCT trip_id FROM trips JOIN routes on routes.route_id = trips.route_id WHERE routes.route_short_name = '".$param."'";
     $result = $conn->query($get_trip_query);
     while ($row = $result ->fetch_array((MYSQLI_ASSOC))) {
-		$results[] = $row['trip_id'];
-		//array_push($results, $row['trip_id']);
+		//$results[] = $row['trip_id'];
+		array_push($results, $row['trip_id']);
 	}
     $result->close();
     
-	//for($i = 0; $i < count($results); $i++) {
-		//echo $results[$i]."\n";
-	//}
+	//echo var_dump($results);
     return $results;
 }
 
